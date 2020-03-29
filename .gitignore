@@ -1,0 +1,5 @@
+.idea/
+*.pyc
+secret_key.txt
+*.sqlite3
+__pycache__/
