@@ -1,0 +1,29 @@
+{% load static %}
+
+<tr class="text-center">
+	<td class="product-remove">
+		<a href="{% url 'remove_from_cart' item.id %}">
+			<span class="ion-ios-close"></span>
+		</a>
+	</td>
+	<td class="image-prod border-dark border-1">
+		<div class="img"
+		     style="background-image:url({% static 'shop/img/product-3.jpg' %});">
+		</div>
+	</td>
+	<td class="product-name">
+		<h3>{{ item.name }}</h3>
+	</td>
+
+	<td class="price">{{ item.price_gross }} PLN</td>
+
+	<td class="quantity">
+		<div class="input-group mb-3">
+			<input type="text" name="quantity"
+			       class="quantity form-control input-number"
+			       value="1" min="1" max="100">
+		</div>
+	</td>
+
+	<td class="total">{{ item.price_gross }} PLN</td>
+</tr>

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product
 
 
 def index(request):
@@ -7,13 +8,10 @@ def index(request):
 
 
 def shop_view(request):
+	products = Product.objects.all()
 	template = 'shop/pages/shop.html'
-	return render(request, template)
-
-
-def cart_view(request):
-	template = 'shop/pages/cart.html'
-	return render(request, template)
+	context = {"products": products}
+	return render(request, template, context)
 
 
 def contact_view(request):

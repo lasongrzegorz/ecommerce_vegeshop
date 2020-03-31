@@ -11619,7 +11619,7 @@ h1, h2, h3, h4, h5,
 }
 
 .table {
-  min-width: 1000px !important;
+  min-width: 100% !important;
   width: 100%;
   text-align: center;
 }
@@ -11641,7 +11641,7 @@ h1, h2, h3, h4, h5,
 .table tbody tr td {
   text-align: center !important;
   vertical-align: middle;
-  padding: 40px 10px;
+  padding: 5px 5px;
   border: 1px solid transparent !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
 }
@@ -11667,13 +11667,13 @@ h1, h2, h3, h4, h5,
 
 .table tbody tr td.image-prod .img {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   margin: 0 auto;
 }
 
 .table tbody tr td.product-name {
-  width: 30%;
+  width: 10%;
 }
 
 .table tbody tr td.product-name h3 {
