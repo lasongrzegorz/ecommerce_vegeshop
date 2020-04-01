@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 
 from shop.models import Product
-from .models import Cart
+from .models import Cart, CartItem
 
 
 def cart_view(request):
@@ -17,8 +17,9 @@ def cart_view(request):
 		context = {'cart': cart}
 
 		new_total = 0.00
-		for item in cart.products.all():
-			new_total += float(item.price_gross)
+		for item in cart.items.all():
+			line_total = float(item.product.price_gross) * item.quantity
+			new_total += line_total
 		cart.total = new_total
 		cart.save()
 
@@ -48,12 +49,17 @@ def update_car(request, product_id):
 	except Product.DoesNotExist:
 		pass
 
-	if product not in cart.products.all():
-		cart.products.add(product)
-	else:
-		cart.products.remove(product)
+	# Returns tuple of ('CartItem object', True/False)
+	cart_item, created = CartItem.objects.get_or_create(product=product)
+	if created:
+		print('created!!!')
 
-	request.session['items_total'] = cart.products.count()
+	if cart_item not in cart.items.all():
+		cart.items.add(cart_item)
+	else:
+		cart.items.remove(cart_item)
+
+	request.session['items_total'] = cart.items.count()
 
 	return HttpResponseRedirect(reverse('shop:shop'))
 
