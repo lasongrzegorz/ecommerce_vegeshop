@@ -7,7 +7,8 @@ app_name = 'shop'
 urlpatterns = [
     path('', index, name='home'),
     path('shop/', shop_view, name='shop'),
-    path('shop/update_cart/<int:product_id>/', update_car, name='update_cart'),
+    path('shop/update_cart/<int:product_id>/', update_car,
+         name='update_cart'),
     # path('shop/add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
     path('cart/', include('carts.urls')),
     path('contact/', contact_view, name='contact'),
