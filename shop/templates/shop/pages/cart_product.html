@@ -2,7 +2,8 @@
 
 <tr class="text-center">
 	<td class="product-remove">
-		<a href="{% url 'shop:carts:remove_from_cart' item.id %}">
+		<a href="{% url 'shop:update_cart' product.id %}">
+{#			{% url 'shop:carts:remove_from_cart' item.id %}#}
 			<span class="ion-ios-close"></span>
 		</a>
 	</td>
@@ -12,10 +13,10 @@
 		</div>
 	</td>
 	<td class="product-name">
-		<h3>{{ item.name }}</h3>
+		<h3>{{ product.name }}</h3>
 	</td>
 
-	<td class="price">{{ item.price_gross }} PLN</td>
+	<td class="price">{{ product.price_gross }} PLN</td>
 
 	<td class="quantity">
 		<div class="input-group mb-3">
@@ -25,5 +26,5 @@
 		</div>
 	</td>
 
-	<td class="total">{{ item.price_gross }} PLN</td>
+	<td class="total">{{ product.price_gross }} PLN</td>
 </tr>

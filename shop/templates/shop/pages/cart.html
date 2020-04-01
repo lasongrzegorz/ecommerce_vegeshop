@@ -29,7 +29,7 @@
 
 {# List cart items							#}
 								{% if not empty %}
-									{% for item in cart.products.all %}
+									{% for product in cart.products.all %}
 										{% include 'shop/pages/cart_product.html' %}
 									{% endfor %}
 								{% else %}
