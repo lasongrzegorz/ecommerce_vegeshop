@@ -11,7 +11,6 @@ def cart_view(request):
 		the_id = request.session['cart_id']
 	except:
 		the_id = None
-	the_id = 1
 
 	if the_id:
 		cart = Cart.objects.get(id=the_id)
@@ -33,7 +32,16 @@ def cart_view(request):
 
 def update_car(request, product_id):
 
-	cart = Cart.objects.get(id=1)
+	request.session.set_expiry(600)  # Temporarily set to 10min
+	try:
+		the_id = request.session['cart_id']
+	except:
+		new_cart = Cart()
+		new_cart.save()
+		request.session['cart_id'] = new_cart.id
+		the_id = new_cart.id
+
+	cart = Cart.objects.get(id=the_id)
 
 	try:
 		product = Product.objects.get(id=product_id)
@@ -44,6 +52,8 @@ def update_car(request, product_id):
 		cart.products.add(product)
 	else:
 		cart.products.remove(product)
+
+	request.session['items_total'] = cart.products.count()
 
 	return HttpResponseRedirect(reverse('shop:shop'))
 
