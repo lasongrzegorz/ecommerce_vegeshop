@@ -13,8 +13,6 @@ class CartItem(models.Model):
 
 
 class Cart(models.Model):
-	# items = models.ManyToManyField(CartItem, null=True, blank=True)
-	# products = models.ManyToManyField(Product, null=True, blank=True)
 	total = models.DecimalField(max_digits=200, decimal_places=2, default=0.00)
 	active = models.BooleanField(default=True)
 	updated = models.DateTimeField(auto_now=True)
@@ -22,3 +20,10 @@ class Cart(models.Model):
 
 	def __str__(self):
 		return f'Cart id: {self.id}'
+
+	def get_cart_total(self):
+		new_total = 0
+		for item in self.cartitem_set.all():
+			line_total = float(item.product.price_gross) * item.quantity
+			new_total += line_total
+		return new_total
