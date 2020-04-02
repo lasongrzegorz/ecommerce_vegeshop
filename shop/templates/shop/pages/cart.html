@@ -25,9 +25,8 @@
 								<th>Total</th>
 							</tr>
 							</thead>
-							<tbody>
-
 {# List cart items							#}
+							<tbody>
 								{% if not empty %}
 									{% for item in cart.cartitem_set.all %}
 										{% include 'shop/pages/cart_product.html' %}
@@ -60,7 +59,7 @@
 							<span>{{ cart.total }} PLN</span>
 						</p>
 					</div>
-					<p><a href="checkout.html"
+					<p><a href="{% url 'shop:checkout' %}"
 						  class="btn btn-primary py-3 px-4">Zapłać i zamów</a></p>
 				</div>
 			</div>
