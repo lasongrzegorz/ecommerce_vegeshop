@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from shop.models import Product
-from .models import Cart
+from .models import Cart, CartItem
 
 
 def cart_view(request):
@@ -14,16 +14,13 @@ def cart_view(request):
 
 	if the_id:
 		cart = Cart.objects.get(id=the_id)
-		context = {'cart': cart}
-
-		new_total = 0.00
-		for item in cart.products.all():
-			new_total += float(item.price_gross)
-		cart.total = new_total
+		cart.total = cart.get_cart_total()
 		cart.save()
-
+		request.session['items_total'] = cart.cartitem_set.count()
+		context = {'cart': cart}
 	else:
 		empty_message = 'Twój koszyk jest pusty'
+		request.session['items_total'] = 0
 		context = {'empty': True, 'messages': empty_message}
 
 	template = 'shop/pages/cart.html'
@@ -31,35 +28,9 @@ def cart_view(request):
 
 
 def add_to_cart(request, product_id):
+	request.session.set_expiry(600)  # Temporarily set to 10min
 
-	request.session.set_expiry(300)  # Temporarily 5mins
-
-	try:
-		the_id = request.session['cart_id']
-	except:
-		new_cart = Cart()
-		new_cart.save()
-		request.session['cart_id'] = new_cart.id
-		the_id = new_cart.id
-
-	cart = Cart.objects.get(id=the_id)
-	try:
-		product = Product.objects.get(id=product_id)
-	except Product.DoesNotExist:
-		pass
-	except:
-		pass
-
-	if product not in cart.products.all():
-		cart.products.add(product)
-
-	request.session['items_total'] = cart.products.count()
-
-	return HttpResponseRedirect(reverse('shop'))
-
-
-def remove_from_cart(request, product_id):
-
+	# to instantiate new cart per session
 	try:
 		the_id = request.session['cart_id']
 	except:
@@ -75,9 +46,28 @@ def remove_from_cart(request, product_id):
 	except Product.DoesNotExist:
 		pass
 
-	if product in cart.products.all():
-		cart.products.remove(product)
+	if request.method == 'POST':
+		qty = request.POST['qty']
+		if int(qty) > 0:
+			cart_item = CartItem.objects.create(cart=cart, product=product)
+			cart_item.quantity = int(qty)
+			cart_item.save()
 
-	request.session['items_total'] = cart.products.count()
+			request.session['items_total'] = cart.cartitem_set.count()
 
-	return HttpResponseRedirect(reverse('cart_view'))
+			return redirect(reverse('shop:shop'))
+	else:
+		return redirect(reverse('shop:shop'))
+
+
+def remove_from_cart(request, id):
+	try:
+		the_id = request.session['cart_id']
+		# cart = Cart.objects.get(id=the_id)
+	except:
+		return redirect(reverse('shop:carts:cart_view'))
+
+	cart_item = CartItem.objects.get(id=id)
+	cart_item.delete()
+
+	return redirect(reverse('shop:carts:cart_view'))

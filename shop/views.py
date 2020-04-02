@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Product
 
 
@@ -22,3 +23,18 @@ def contact_view(request):
 def about_view(request):
 	template = 'shop/pages/about.html'
 	return render(request, template)
+
+
+def search_view(request):
+	try:
+		q = request.GET.get('q')
+	except:
+		q = None
+
+	if q:
+		products = Product.objects.filter(name__contains=q)
+		context = {'query': q, 'products': products}
+		template = 'shop/pages/shop.html'
+		return render(request, template, context)
+	else:
+		return redirect(reverse('shop:shop'))
