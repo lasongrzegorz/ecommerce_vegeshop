@@ -23,7 +23,7 @@ def checkout(request):
 		del request.session['cart_id']
 		return redirect(reverse('shop:carts:cart_view'))
 
-	context = {'cart': cart}
-	template = 'shop/pages/cart.html'
+	context = {'order': new_order}
+	template = 'shop/pages/checkout.html'
 
 	return render(request, template, context)

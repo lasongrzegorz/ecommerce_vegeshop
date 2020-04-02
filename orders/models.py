@@ -4,8 +4,7 @@ from carts.models import Cart
 
 STATUS_CHOICES = (
 	('Started', 'Rozpoczęte'),
-	('Preparing', 'W przygotowaniu'),
-	('Finished', 'Gotowe'),
+	('Finished', 'Zamówione'),
 )
 
 
@@ -18,3 +17,5 @@ class Order(models.Model):
 
 	def __str__(self):
 		return f'Id: {self.id} | {self.order_id}'
+
+

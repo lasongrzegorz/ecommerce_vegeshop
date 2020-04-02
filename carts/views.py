@@ -14,8 +14,12 @@ def cart_view(request):
 
 	if the_id:
 		cart = Cart.objects.get(id=the_id)
-		cart.total = cart.get_cart_total()
+		cart.products_total = cart.get_products_total()
+		cart.delivery_cost = cart.get_delivery_cost()
 		cart.save()
+		cart.cart_total = cart.products_total + cart.delivery_cost
+		cart.save()
+
 		request.session['items_total'] = cart.cartitem_set.count()
 		context = {'cart': cart}
 	else:
@@ -28,7 +32,7 @@ def cart_view(request):
 
 
 def add_to_cart(request, product_id):
-	request.session.set_expiry(600)  # Temporarily set to 10min
+	request.session.set_expiry(1200)  # Temporarily set to 20min
 
 	# to instantiate new cart per session
 	try:
