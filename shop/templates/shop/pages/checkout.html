@@ -21,26 +21,22 @@
 	</section>
 
 	<section class="address-details">
-		<form method="POST" action=".">
-			<label id="address_street">Ulica</label>
-			<input type="text" placeholder="np. Daleka 11/50" id="address_street">
+		<div class="container">
+			<div class="row mx-auto">
+				<div class="col">
+					<h3>Adres dostawy</h3>
+					<form method="POST" action="{% url 'shop:checkout_sent' %}">
+						{% csrf_token %}
+						{{ address_form }}
+						<h3>Dane do faktury</h3>
+						<h6>(wypełnij poniżej, jeżeli potrzebujesz)</h6>
+						{{ address_invoice_form }}
+						<button type="submit"> Wyślij zamówienie </button>
+					</form>
+				</div>
+			</div>
+		</div>
 
-			<label id="address_city">Miasto</label>
-			<input type="text" placeholder="np. Kraków" id="address_city">
-
-			<label id="address_postal_code">Kod pocztowy</label>
-			<input type="text" placeholder="np. 30-300" id="address_postal_code">
-
-			<label id="address_email">Email</label>
-			<input type="text" placeholder="np. jan.kowalski@poczta.pl"
-			       id="address_email">
-
-			<label id="address_phone">Email</label>
-			<input type="number" placeholder="np. 606 777 888" id="address_phone">
-
-			<button type="submit"> Wyślij zamówienie </button>
-
-		</form>
 	</section>
 
 	<section class="ftco-section ftco-cart">

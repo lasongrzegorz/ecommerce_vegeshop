@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from carts.models import Cart
-from .models import Order
+from .models import Order, OrderAddress, OrderInvoiceAddress
+from .forms import OrderAddressForm, OrderInvoiceAddressForm
 
 
 def checkout(request):
@@ -17,13 +18,54 @@ def checkout(request):
 	new_order, created = Order.objects.get_or_create(cart=cart)
 	if created:
 		new_order.order_id = 'random_id'
+		request.session['order_id'] = new_order.id
 		new_order.save()
 
 	if new_order.status == 'Finished':
 		del request.session['cart_id']
+		# return redirect(reverse('shop:carts:cart_view'))
+
+	address_form = OrderAddressForm()
+	address_invoice_form = OrderInvoiceAddressForm()
+	context = {
+		'order': new_order,
+		'address_form': address_form,
+		'address_invoice_form': address_invoice_form,
+	}
+	template = 'shop/pages/checkout.html'
+
+	return render(request, template, context)
+
+
+def checkout_sent(request):
+
+	try:
+		order_id = request.session['order_id']
+		order_to_send = Order.objects.get(id=order_id)
+	except Order.DoesNotExist:
 		return redirect(reverse('shop:carts:cart_view'))
 
-	context = {'order': new_order}
-	template = 'shop/pages/checkout.html'
+	if request.method == 'POST':
+		order_address = OrderAddress.objects.create(order=order_to_send)
+		address_form = OrderAddressForm(request.POST)
+		if address_form.is_valid():
+			order_address = OrderAddressForm(request.POST, instance=order_address)
+			order_address.save()
+
+		order_invoice_address = OrderInvoiceAddress.objects.create(order=order_to_send)
+		invoice_address_form = OrderInvoiceAddressForm(request.POST)
+		if invoice_address_form.is_valid():
+			order_invoice_address = OrderInvoiceAddressForm(request.POST, instance=order_invoice_address)
+			order_invoice_address.save()
+		# return redirect(reverse('shop:checkout_sent'))
+	else:
+		print('not post request')
+
+	order_to_send.status = 'Finished'
+	if order_to_send.status == 'Finished':
+		del request.session['cart_id']
+		del request.session['items_total']
+	context = {}
+	template = 'shop/pages/checkout_sent.html'
 
 	return render(request, template, context)
