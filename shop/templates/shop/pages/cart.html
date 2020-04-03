@@ -22,12 +22,11 @@
 								<th>Produkt</th>
 								<th>Cena</th>
 								<th>Ilość</th>
-								<th>Total</th>
+								<th>Suma</th>
 							</tr>
 							</thead>
-							<tbody>
-
 {# List cart items							#}
+							<tbody>
 								{% if not empty %}
 									{% for item in cart.cartitem_set.all %}
 										{% include 'shop/pages/cart_product.html' %}
@@ -48,20 +47,38 @@
 						<h3>Podsumowanie</h3>
 						<p class="d-flex">
 							<span>Produkty</span>
-							<span>{{ cart.total }} PLN</span>
+							<span>
+								{%  if cart.products_total %}
+									{{ cart.products_total }} PLN
+								{% else %}
+									0 PLN
+								{% endif %}
+							</span>
 						</p>
 						<p class="d-flex">
 							<span>Dostawa</span>
-							<span>$0.00</span>
+							<span>
+								{%  if cart.delivery_cost %}
+									{{ cart.delivery_cost }} PLN
+								{% else %}
+									0 PLN
+								{% endif %}
+							</span>
 						</p>
 						<hr>
 						<p class="d-flex total-price">
 							<span>Total</span>
-							<span>{{ cart.total }} PLN</span>
+							<span>
+								{%  if cart.cart_total %}
+									{{ cart.cart_total }} PLN
+								{% else %}
+									0 PLN
+								{% endif %}
+							</span>
 						</p>
 					</div>
-					<p><a href="checkout.html"
-						  class="btn btn-primary py-3 px-4">Zapłać i zamów</a></p>
+					<p><a href="{% url 'shop:checkout' %}"
+						  class="btn btn-primary py-3 px-4">Zamów i zapłać</a></p>
 				</div>
 			</div>
 		</div>
