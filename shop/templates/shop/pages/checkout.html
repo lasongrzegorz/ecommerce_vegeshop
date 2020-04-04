@@ -27,10 +27,15 @@
 					<h3>Adres dostawy</h3>
 					<form method="POST" action="{% url 'shop:checkout_sent' %}">
 						{% csrf_token %}
-						{{ address_form }}
+						<h3>Adres dostawy</h3>
+						<table>
+							{{ address_form.as_table }}
+						</table>
 						<h3>Dane do faktury</h3>
 						<h6>(wypełnij poniżej, jeżeli potrzebujesz)</h6>
-						{{ address_invoice_form }}
+						<table>
+							{{ address_invoice_form.as_table }}
+						</table>
 						<button type="submit"> Wyślij zamówienie </button>
 					</form>
 				</div>

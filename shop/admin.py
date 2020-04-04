@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Product
+from django.utils.translation import ugettext_lazy as _
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -12,18 +13,15 @@ class ProductAdmin(admin.ModelAdmin):
 		'min_qty_value',
 		'min_qty_info',
 		'net_price',
-		'vat',
+		'vat_rate',
 		'price_gross',
 		'updated',
 	]
 	list_editable = [
 		'active',
-		'min_qty_value',
-		'min_qty_info',
 		'net_price',
-		'vat',
 	]
-	# list_display_links = None
+	list_display_links = ['name']
 	list_filter = ['active']
 	readonly_fields = ['updated', 'created']
 

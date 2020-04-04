@@ -1,0 +1,177 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row">
+
+				<table class="table">
+					<thead class="thead-primary">
+					<tr class="text-center">
+						<th>Aktywny</th>
+						<th>Zdjęcie</th>
+						<th>Produkt</th>
+						<th>Min ilość</th>
+						<th>kg/szt/op</th>
+						<th>Netto</th>
+						<th>VAT</th>
+						<th>Brutto</th>
+						<th>Ostatnia zmiana</th>
+					</tr>
+					</thead>
+					<tbody>
+					{% for product in products %}
+						<tr class="text-center">
+							<td class="product-remove">
+								{{product.active}}
+							</td>
+							<td class="image-prod border-dark border-1">
+								<div class="img"
+								     style="background-image:url({% static 'shop/img/product-3.jpg' %});">
+								</div>
+							</td>
+							<td class="product-name">
+								{{product.name}}
+							</td>
+							<td class="price">
+								{{product.min_qty_value}}
+							</td>
+							<td class="quantity">
+								{{product.min_qty_info}}
+							</td>
+							<td class="total">
+								{{product.net_price}}
+							</td>
+							<td class="total">
+								{{product.vat}}
+							</td>
+						</tr>
+
+					{% endfor %}
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row">
+
+{#			***************** Editing form #}
+				<form method="post" novalidate>
+				  {% csrf_token %}
+
+				  {{ products_form.non_field_errors }}
+
+				  {% for hidden_field in products_form.hidden_fields %}
+				    {{ hidden_field.errors }}
+				    {{ hidden_field }}
+				  {% endfor %}
+
+					<table class="table">
+					<thead class="thead-primary">
+					<tr class="text-center">
+						<th>Aktywny</th>
+						<th>Zdjęcie</th>
+						<th>Produkt</th>
+						<th>Min ilość</th>
+						<th>kg/szt/op</th>
+						<th>Netto</th>
+						<th>VAT</th>
+						<th>Brutto</th>
+						<th>Ostatnia zmiana</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center">
+							<td class="product-remove">
+								{{products_form.active}} {{ active.field.errors }}
+							</td>
+							<td class="image-prod border-dark border-1">
+								{{products_form.image}} {{ products_form.image.errors }}
+							</td>
+							<td class="product-name">
+								{{products_form.name}} {{ products_form.name.errors }}
+							</td>
+							<td class="price">
+								{{products_form.min_qty_value}} {{ products_form.min_qty_value.errors }}
+							</td>
+							<td class="quantity">
+								{{products_form.min_qty_info}} {{ products_form.min_qty_info.errors }}
+							</td>
+							<td class="total">
+								{{products_form.net_price}} {{ products_form.net_price.errors }}
+							</td>
+							<td class="total">
+								{{products_form.vat}} {{ products_form.vat.errors }}
+							</td>
+						</tr>
+					</tbody>
+				  </table>
+
+				  <button type="submit">Submit</button>
+				</form>
+
+{#				<table class="table">#}
+{#					<thead class="thead-primary">#}
+{#					<tr class="text-center">#}
+{#						<th>Aktywny</th>#}
+{#						<th>Zdjęcie</th>#}
+{#						<th>Produkt</th>#}
+{#						<th>Min ilość</th>#}
+{#						<th>kg/szt/op</th>#}
+{#						<th>Netto</th>#}
+{#						<th>VAT</th>#}
+{#						<th>Brutto</th>#}
+{#						<th>Ostatnia zmiana</th>#}
+{#					</tr>#}
+{#					</thead>#}
+{#					<tbody>#}
+{#					{% for product in products %}#}
+{#						<tr class="text-center">#}
+{#							<td class="product-remove">#}
+{#								<a href="#">#}
+{#									<span class="ion-ios-close"></span>#}
+{#								</a>#}
+{#							</td>#}
+{#							<td class="image-prod border-dark border-1">#}
+{#								<div class="img"#}
+{#								     style="background-image:url({% static 'shop/img/product-3.jpg' %});">#}
+{#								</div>#}
+{#							</td>#}
+{#							<td class="product-name">#}
+{#								<h3>{{ product.name }}</h3>#}
+{#							</td>#}
+{##}
+{#							<td class="price">{{ product.price_gross }} PLN</td>#}
+{##}
+{#							<td class="quantity">#}
+{#								<p class="w-100 text-center">#}
+{#									{{ quantity }} {{ product.min_qty_info }}#}
+{#								</p>#}
+{#							</td>#}
+{##}
+{#							<td class="total">{{ item.line_total }} PLN {{ item.total }}</td>#}
+{#						</tr>#}
+{##}
+{#					{% endfor %}#}
+{##}
+{#					</tbody>#}
+{#				</table>#}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
