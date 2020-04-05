@@ -5,58 +5,49 @@
 
 	<div class="hero-wrap hero-bread"
 		 style="background-image: url({% static 'shop/img/bg_1.jpg'%});">
-		<div class="container">
-			<div class="row no-gutters slider-text align-items-center justify-content-center">
-				<div class="col-md-9 ftco-animate text-center">
-					<p class="breadcrumbs"><span class="mr-2">
-						<a href="index.html">Home</a></span>
-						<span>Products</span>
-					</p>
-					<h1 class="mb-0 bread">Products</h1>
-				</div>
-			</div>
-		</div>
 	</div>
 
+	</div>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
 					<ul class="product-category">
-						<li><a href="#" class="active">All</a></li>
-						<li><a href="#">Vegetables</a></li>
-						<li><a href="#">Fruits</a></li>
-						<li><a href="#">Juice</a></li>
-						<li><a href="#">Dried</a></li>
+						<li><a href="{% url 'shop:shop' %}" class="filter-products active">Wszystkie</a></li>
+						<li><a href="{% url 'shop:vegetables' %}" class="filter-products">Warzywa</a></li>
+						<li><a href="{% url 'shop:fruits' %}" class="filter-products">Owoce</a></li>
+						<li><a href="{% url 'shop:others' %}" class="filter-products">Inne</a></li>
 					</ul>
 				</div>
 			</div>
 
-{# List all products#}
+{# List all active products#}
 			<div class="row">
 				{% for product in products %}
-					{% include 'shop/pages/shop_product.html' %}
+					{% if product.active%}
+						{% include 'shop/pages/shop_product.html' %}
+					{%  endif %}
 				{% endfor %}
 			</div>
 
 {# Pagination#}
-			<div class="row mt-5">
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li><a href="#">&lt;</a></li>
-							<li class="active"><span>1</span></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&gt;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+{#			<div class="row mt-5">#}
+{#				<div class="col text-center">#}
+{#					<div class="block-27">#}
+{#						<ul>#}
+{#							<li><a href="#">&lt;</a></li>#}
+{#							<li class="active"><span>1</span></li>#}
+{#							<li><a href="#">2</a></li>#}
+{#							<li><a href="#">3</a></li>#}
+{#							<li><a href="#">4</a></li>#}
+{#							<li><a href="#">5</a></li>#}
+{#							<li><a href="#">&gt;</a></li>#}
+{#						</ul>#}
+{#					</div>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</section>#}
 
 	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
 		<div class="container py-4">
@@ -79,6 +70,5 @@
 			</div>
 		</div>
 	</section>
-
 
 {% endblock %}

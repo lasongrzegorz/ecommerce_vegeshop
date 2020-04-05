@@ -9,12 +9,21 @@ MIN_QUANTITIES = [
 	('pack', 'op'),
 ]
 
+PRODUCTS_CATEGORIES = [
+	('Vegetables', 'Warzywa'),
+	('Fruits', 'Owoce'),
+	('Other', 'Inne'),
+]
+
 
 class Product(models.Model):
 	name = models.CharField(max_length=120)
-	description = models.CharField(max_length=240)
+	description = models.CharField(max_length=240, null=True, blank=True)
+	category = models.CharField(max_length=120, choices=PRODUCTS_CATEGORIES,
+	                            default='Warzywa')
 	min_qty_value = models.FloatField(default=1)
-	min_qty_info = models.CharField(choices=MIN_QUANTITIES, max_length=120)
+	min_qty_info = models.CharField(choices=MIN_QUANTITIES, max_length=120,
+	default='kg')
 	net_price = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
 	vat = models.FloatField(
 		default=0.05,

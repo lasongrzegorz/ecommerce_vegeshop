@@ -25,7 +25,19 @@
         </svg>
     </div>
 
+
     {% include 'shop/scripts.html' %}
+
+		<script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.product-category li .filter-products').on('click', function ( e ) {
+				        $('.product-category li .filter-products.active').removeClass('active');
+				        $(this).addClass('active');
+				    });
+        });
+
+    </script>
 
 </body >
 </html >

@@ -15,6 +15,27 @@ def shop_view(request):
 	return render(request, template, context)
 
 
+def shop_vegetables_view(request):
+	products = Product.objects.filter(category='Vegetables')
+	template = 'shop/pages/shop.html'
+	context = {"products": products}
+	return render(request, template, context)
+
+
+def shop_fruits_view(request):
+	products = Product.objects.all().filter(category='Fruits')
+	template = 'shop/pages/shop.html'
+	context = {"products": products}
+	return render(request, template, context)
+
+
+def shop_others_view(request):
+	products = Product.objects.all().filter(category='Others')
+	template = 'shop/pages/shop.html'
+	context = {"products": products}
+	return render(request, template, context)
+
+
 def contact_view(request):
 	template = 'shop/pages/contact.html'
 	return render(request, template)
