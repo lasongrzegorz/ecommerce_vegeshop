@@ -19,23 +19,27 @@ PRODUCTS_CATEGORIES = [
 
 
 class Product(models.Model):
-	name = models.CharField(max_length=120)
-	description = models.CharField(max_length=240, null=True, blank=True)
+	name = models.CharField(max_length=120, verbose_name='Nazwa')
+	description = models.CharField(max_length=240, null=True, blank=True,
+	                               verbose_name='Opis')
 	category = models.CharField(max_length=120, choices=PRODUCTS_CATEGORIES,
-	                            default='Warzywa')
-	min_qty_value = models.FloatField(default=1)
+	                            default='Warzywa', verbose_name='Kategoria')
+	min_qty_value = models.FloatField(default=1, verbose_name='Min ilość')
 	min_qty_info = models.CharField(choices=MIN_QUANTITIES, max_length=120,
-	default='kg')
-	net_price = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
+	default='kg', verbose_name='Min waga')
+	net_price = models.DecimalField(max_digits=20, decimal_places=2,
+	                                default=0.00, verbose_name='Netto')
 	vat = models.FloatField(
 		default=0.05,
 		validators=[
 			MinValueValidator(0),
 			MaxValueValidator(1),
-		]
+		],
+		verbose_name='VAT',
 	)
-	active = models.BooleanField(default=True)
-	image = models.ImageField(upload_to='images/', blank=True, null=True)
+	active = models.BooleanField(default=True, verbose_name='Aktywny')
+	image = models.ImageField(upload_to='images/', blank=True, null=True,
+	                          verbose_name='Zdjęcie')
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 
