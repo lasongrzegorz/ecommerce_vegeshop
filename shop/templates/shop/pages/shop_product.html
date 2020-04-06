@@ -1,6 +1,7 @@
 {% load static %}
+{% load crispy_forms_tags %}
 
-<div class="col-md-6 col-lg-3 ftco-animate">
+<div class=" col-4 col-md-3 col-lg-2 ftco-animate">
 	<div class="product">
 		<a href="#" class="img-prod">
 			<img class="img-fluid"
@@ -12,20 +13,24 @@
 		</a>
 		<div class="text py-3 pb-4 px-3 text-center">
 			<h3>{{ product.name }}</h3>
+			<p>{{ product.description }}</p>
 			<div class="d-flex">
 				<div class="pricing">
-					<p class="price"><span>{{ product.price_gross }}</span></p>
+					<p class="price">
+						<span>{{ product.price_gross }} zł/{{ product.min_qty_info }}</span>
+					</p>
 				</div>
 			</div>
 			<div class="bottom-area d-flex px-3">
-				<div class="m-auto d-flex">
+				<div class="m-auto">
 					<form method="POST" action=
 							"{% url 'shop:add_to_cart' product.id %}" class="d-flex">
 						{% csrf_token %}
 						<input type="number" name="qty"
-						       class="quantity form-control input-number"
-						       value="1" min="1" max="100">
-						<button type="submit" class="buy-now d-flex justify-content-center align-items-center mx-1">
+						       class="quantity input-number py-0"
+						       value="1" min="1" max="500"
+										style="padding: 0 0 0 10px;">
+						<button type="submit" class="">
 							<span><i class="ion-ios-cart"></i></span>
 						</button>
 					</form>
