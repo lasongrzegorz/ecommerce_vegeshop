@@ -22,7 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
 		'net_price',
 	]
 	list_display_links = ['name']
-	list_filter = ['active']
+	list_filter = ['active', 'category']
 	readonly_fields = ['updated', 'created']
 
 	class Meta:

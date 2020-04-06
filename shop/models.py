@@ -7,11 +7,13 @@ MIN_QUANTITIES = [
 	('g', 'g'),
 	('pcs', 'szt'),
 	('pack', 'op'),
+	('liter', 'l')
 ]
 
 PRODUCTS_CATEGORIES = [
 	('Vegetables', 'Warzywa'),
 	('Fruits', 'Owoce'),
+	('Spices', 'Zioła i przyprawy'),
 	('Other', 'Inne'),
 ]
 

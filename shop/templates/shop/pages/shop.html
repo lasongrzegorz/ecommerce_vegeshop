@@ -4,10 +4,9 @@
 {% block content %}
 
 	<div class="hero-wrap hero-bread"
-		 style="background-image: url({% static 'shop/img/bg_1.jpg'%});">
+	     style="background-image: url({% static 'shop/img/bg_1.jpg' %});">
 	</div>
 
-	</div>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -16,37 +15,21 @@
 						<li><a href="{% url 'shop:shop' %}" class="filter-products active">Wszystkie</a></li>
 						<li><a href="{% url 'shop:vegetables' %}" class="filter-products">Warzywa</a></li>
 						<li><a href="{% url 'shop:fruits' %}" class="filter-products">Owoce</a></li>
+						<li><a href="{% url 'shop:spices' %}" class="filter-products">Przyprawy</a></li>
 						<li><a href="{% url 'shop:others' %}" class="filter-products">Inne</a></li>
 					</ul>
 				</div>
 			</div>
 
-{# List all active products#}
+			{# List all active products#}
 			<div class="row">
 				{% for product in products %}
-					{% if product.active%}
+					{% if product.active %}
 						{% include 'shop/pages/shop_product.html' %}
-					{%  endif %}
+					{% endif %}
 				{% endfor %}
 			</div>
-
-{# Pagination#}
-{#			<div class="row mt-5">#}
-{#				<div class="col text-center">#}
-{#					<div class="block-27">#}
-{#						<ul>#}
-{#							<li><a href="#">&lt;</a></li>#}
-{#							<li class="active"><span>1</span></li>#}
-{#							<li><a href="#">2</a></li>#}
-{#							<li><a href="#">3</a></li>#}
-{#							<li><a href="#">4</a></li>#}
-{#							<li><a href="#">5</a></li>#}
-{#							<li><a href="#">&gt;</a></li>#}
-{#						</ul>#}
-{#					</div>#}
-{#				</div>#}
-{#			</div>#}
-{#		</div>#}
-{#	</section>#}
+		</div>
+	</section>
 
 {% endblock %}

@@ -10,33 +10,37 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Warzywniak</h2>
-              <p>U nas znajdziesz produkty najwyższej jakości. 100% produktów pochodzenia polskiego!</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
+              <h2 class="ftco-heading-2 text-center
+              text-md-left">Warzywniak</h2>
+              <p class="text-center text-md-left">U nas znajdziesz produkty
+	              najwyższej jakości. 100%
+	              produktów pochodzenia polskiego!</p>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 text-center">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Sklep</a></li>
-	              <li><a href="#" class="py-2 d-block">Kontakt</a></li>
-                <li><a href="#" class="py-2 d-block">O nas</a></li>
+                <li><a href="{% url 'shop:shop' %}" class="py-2
+                d-block">Sklep</a></li>
+	              <li><a href="{% url 'shop:contact' %}" class="py-2
+	              d-block">Kontakt</a></li>
+                <li><a href="{% url 'shop:about' %}" class="py-2 d-block">O
+	                nas</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md border-1">
-            <div class="ftco-footer-widget mb-4 text-right">
+            <div class="ftco-footer-widget mb-4 text-center text-md-right">
             	<h2 class="ftco-heading-2">Masz pytania?</h2>
             	<div class="block-23 mb-3 d-flex justify-content-end">
-	              <ul class="text-right">
-	                <li class="d-flex justify-content-end"><span class="icon icon-map-marker"></span>
+	              <ul class="">
+	                <li class="d-flex justify-content-center
+	                justify-content-md-end">
+		                <span class="icon icon-map-marker"></span>
 		                <span class="text pl-2">Felińskiego 33B/10, 31-236
-			                Kraków</span></li>
+			                Kraków</span>
+	                </li>
 	                <li class="d-flex justify-content-end"><span class="icon icon-phone"></span><span
 			                class="text pl-2">+2 392 3929 210</span></li>
 	                <li class="d-flex justify-content-end"><span class="icon

@@ -30,7 +30,14 @@ def shop_fruits_view(request):
 
 
 def shop_others_view(request):
-	products = Product.objects.all().filter(category='Others')
+	products = Product.objects.all().filter(category='Other')
+	template = 'shop/pages/shop.html'
+	context = {"products": products}
+	return render(request, template, context)
+
+
+def shop_spices_view(request):
+	products = Product.objects.all().filter(category='Spices')
 	template = 'shop/pages/shop.html'
 	context = {"products": products}
 	return render(request, template, context)

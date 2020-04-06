@@ -4,64 +4,66 @@
 {% block content %}
 
 	<div class="hero-wrap hero-bread"
-		 style="background-image: url({% static 'shop/img/bg_1.jpg' %});">
+	     style="background-image: url({% static 'shop/img/bg_1.jpg' %});">
 	</div>
-	<section class="ftco-section contact-section bg-light">
+	<section class="ftco-section contact-section">
 		<div class="container">
-			<div class="row d-flex mb-5 contact-info">
-				<div class="w-100"></div>
-				<div class="col-md-3 d-flex">
+			<div class="row d-flex mb-5 contact-info justify-content-around">
+				<div class="col-md-4 d-flex">
 					<div class="info bg-white p-4">
-						<p><span>Address:</span>
-							198 West 21th Street, Suite
-							721 New York NY 10016
+						<h6 class="text-center">Adres:</h6><hr>
+						<p class="text-center">
+							Felińskiego 33B / 10<br>31-236 Kraków
 						</p>
 					</div>
 				</div>
-				<div class="col-md-3 d-flex">
+				<div class="col-md-4 d-flex">
 					<div class="info bg-white p-4">
-						<p><span>Phone:</span>
-							<a href="tel://1234567920">+1 235 2355 98</a></p>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex">
-					<div class="info bg-white p-4">
-						<p><span>Email:</span>
-							<a href="mailto:info@yoursite.com">info@yoursite.com</a>
+						<h6 class="text-center">Telefon:</h6><hr>
+						<p class="text-center">
+							+48 665 455 342
 						</p>
 					</div>
 				</div>
-				<div class="col-md-3 d-flex">
+				<div class="col-md-4 d-flex">
 					<div class="info bg-white p-4">
-						<p><span>Website</span> <a href="#">yoursite.com</a>
+						<h6 class="text-center">Email:</h6><hr>
+						<p class="text-center">
+							<a href="mailto:warzywniak@gmail.com">warzywniak@gmail.com</a>
 						</p>
 					</div>
 				</div>
 			</div>
-			<div class="row block-9">
-				<div class="col-md-6 order-md-last d-flex">
+			<div class="row block-9 d-flex flex-column">
+				<div class="col">
+					<h5 class="mx-auto text-center">
+						Skontaktuj się bezpośrednio lub wykorzystaj poniższy formularz
+					</h5>
+				</div>
+				<div class="col-md-8 order-md-last d-flex mx-auto">
 					<form action="#" class="bg-white p-5 contact-form">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Name">
+							<input type="text" class="form-control text-center"
+							       placeholder="Twoje imię i nazwisko">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Email">
+							<input type="text" class="form-control text-center"
+							       placeholder="Twój email">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Subject">
+							<input type="text" class="form-control text-center"
+							       placeholder="Tytuł">
 						</div>
 						<div class="form-group">
-							<textarea name="" id="" cols="30" rows="7"
-									  class="form-control"
-									  placeholder="Message"></textarea>
+							<textarea name="" id="" cols="30" rows="5"
+							          class="form-control text-center"
+							          placeholder="Treść"></textarea>
 						</div>
 						<div class="form-group">
-							<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+							<input type="submit" value="Wyślij"
+							       class="btn btn-primary py-3 px-5">
 						</div>
 					</form>
-				</div>
-				<div class="col-md-6 d-flex">
-					<div id="map" class="bg-white"></div>
 				</div>
 			</div>
 		</div>

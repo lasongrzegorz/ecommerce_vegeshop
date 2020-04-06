@@ -15,7 +15,8 @@
 						<div class="col-md-12 ftco-animate text-center">
 							<h1 class="mb-2">Dostarczamy świeże warzywa &amp; owoce</h1>
 							<h2 class="subheading mb-4">Oferujemy świeże warzywa &amp; owoce</h2>
-							<p><a href="#" class="btn btn-primary">Szczegóły</a></p>
+							<p><a href="{% url 'shop:shop' %}" class="btn
+							btn-primary">Sprawdź</a></p>
 						</div>
 
 					</div>
@@ -31,7 +32,8 @@
 						<div class="col-sm-12 ftco-animate text-center">
 							<h1 class="mb-2">100% świeża żywność</h1>
 							<h2 class="subheading mb-4">Oferujemy świeże warzywa &amp; owoce</h2>
-							<p><a href="#" class="btn btn-primary">Szczegóły</a></p>
+							<p><a href="{% url 'shop:shop' %}" class="btn
+							btn-primary">Sprawdż</a></p>
 						</div>
 					</div>
 				</div>
@@ -93,17 +95,19 @@
 	<section class="ftco-section ftco-category ftco-no-pt">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-8 mb-4">
 					<div class="row">
-						<div class="col-md-6 order-md-last align-items-stretch d-flex">
-							<div class="category-wrap-2 ftco-animate img align-self-stretch d-flex"
-								 style="background-image: url(
-										 {% static 'shop/img/category.jpg'%});">
+						<div class="col-md-6 order-md-last d-flex h-">
+							<div class="category-wrap-2 ftco-animate img mb-4 mb-md-0
+													align-self-stretch d-flex"
+							     style="background-image: url(
+										      {% static 'shop/img/category.jpg'%});">
 								<div class="text text-center">
-									<h2>Warzywa</h2>
-									<p>Dostarczamy najlepszą jakość</p>
-									<p><a href="#" class="btn btn-primary">Przejdż do
-										sklepu</a></p>
+									<h2 class="">Warzywa</h2>
+									<p class="d-none d-md-block">Dostarczamy najlepszą jakość</p>
+									<p><a href="{% url 'shop:shop' %}" class="btn btn-primary">
+										Przejdż do sklepu</a>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -112,7 +116,7 @@
 								 style="background-image: url(
 										 {% static 'shop/img/category-1.jpg'%});">
 								<div class="text px-3 py-1">
-									<h2 class="mb-0"><a href="#">Warzywa</a>
+									<h2 class="mb-0"><a href="{% url 'shop:vegetables' %}">Warzywa</a>
 									</h2>
 								</div>
 							</div>
@@ -120,7 +124,7 @@
 								 style="background-image: url(
 										 {% static 'shop/img/category-2.jpg'%});">
 								<div class="text px-3 py-1">
-									<h2 class="mb-0"><a href="#">Owoce</a>
+									<h2 class="mb-0"><a href="{% url 'shop:fruits' %}">Owoce</a>
 									</h2>
 								</div>
 							</div>
@@ -131,16 +135,17 @@
 				<div class="col-md-4">
 					<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end"
 						 style="background-image: url(
-								 {% static 'shop/img/category-3.jpg'%});">
+								 {% static 'shop/img/category-4.jpg'%});">
 						<div class="text px-3 py-1">
-							<h2 class="mb-0"><a href="#">Soki</a></h2>
+							<h2 class="mb-0">
+								<a href="{% url 'shop:spices' %}">Zioła i przyprawy</a>
+							</h2>
 						</div>
 					</div>
 					<div class="category-wrap ftco-animate img d-flex align-items-end"
-						 style="background-image: url(
-								 {% static 'shop/img/category-4.jpg'%});">
+						 style="background-image: url({% static 'shop/img/category-3.jpg'%});">
 						<div class="text px-3 py-1">
-							<h2 class="mb-0"><a href="#">Inne</a></h2>
+							<h2 class="mb-0"><a href="{% url 'shop:others' %}">Inne</a></h2>
 						</div>
 					</div>
 				</div>
