@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f7xckn4bggb__1d2!wcb-zzz!%)!ld9zlehuwh08k62r@h^r&6'
+SECRET_KEY = os.environ.get('DB_PASS_VEGE_ECOMMERCE')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
