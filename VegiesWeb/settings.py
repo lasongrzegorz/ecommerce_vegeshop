@@ -26,7 +26,7 @@ SECRET_KEY = 'f7xckn4bggb__1d2!wcb-zzz!%)!ld9zlehuwh08k62r@h^r&6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecommerce-vege.herokuapp.com']
+ALLOWED_HOSTS = ['ecommerce-vegeshop.herokuapp.com']
 
 
 # Application definition
