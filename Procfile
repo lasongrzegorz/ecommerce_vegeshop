@@ -1,1 +1,1 @@
-,web: gunicorn VegiesWeb.wsgi
+web: gunicorn VegiesWeb.wsgi
