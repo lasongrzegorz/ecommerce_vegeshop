@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Product
-from django.utils.translation import ugettext_lazy as _
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -13,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 		'min_qty_value',
 		'min_qty_info',
 		'net_price',
-		'vat_rate',
+		'vat',
 		'price_gross',
 		'updated',
 	]
@@ -27,6 +26,20 @@ class ProductAdmin(admin.ModelAdmin):
 
 	class Meta:
 		model = Product
+
+# Changing methods' string representation
+	def vat_rate(self, obj):
+		return obj.vat_rate()
+
+	def price_gross(self, obj):
+		return obj.price_gross
+
+	def is_image(self, obj):
+		return obj.is_image
+
+	vat_rate.short_description = 'VAT'
+	price_gross.short_description = 'Brutto'
+	is_image.short_description = 'Zdjęcie'
 
 
 admin.site.register(Product, ProductAdmin)

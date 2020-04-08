@@ -41,7 +41,8 @@ class Product(models.Model):
 	image = models.ImageField(upload_to='images/', blank=True, null=True,
 	                          verbose_name='Zdjęcie')
 	created = models.DateTimeField(auto_now_add=True)
-	updated = models.DateTimeField(auto_now=True)
+	updated = models.DateTimeField(auto_now=True, verbose_name='Ostatnia '
+	                                                           'zmiana')
 
 	def __str__(self):
 		return self.name
