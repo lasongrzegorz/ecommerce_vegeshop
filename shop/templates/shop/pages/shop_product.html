@@ -1,36 +1,53 @@
 {% load static %}
 
-<div class=" col-4 col-md-3 col-lg-2 ftco-animate">
-	<div class="product">
-		<a href="#" class="img-prod">
-			<img class="img-fluid"
+<div class="col col-md-3 col-lg-2 ftco-animate">
+	<div class="product h-100 d-flex flex-column mb-1">
+		<div class="img-prod d-flex justify-content-center" style="overflow: visible;">
+			<img class="img-fluid p-3"
 			     src="{% if product.image %}{{ product.image.url }}
 								{% else %}{% static 'shop/img/ProductNA.png' %}{% endif %}"
-
-			     alt="Colorlib Template">
+			     alt="{{ product.name }}">
 			<div class="overlay"></div>
-		</a>
-		<div class="text py-3 pb-4 px-3 text-center">
-			<h3>{{ product.name }}</h3>
-			<p>{{ product.description }}</p>
-			<div class="d-flex">
-				<div class="pricing">
-					<p class="price">
-						<span>{{ product.price_gross }} zł/{{ product.min_qty_info }}</span>
-					</p>
+		</div>
+		<div class="text text-center d-flex h-100">
+			<div class="d-flex flex-column w-100 justify-content-between">
+				<div>
+					<h3>{{ product.name }}</h3>
+					<p>{{ product.description }}</p>
+				</div>
+				<div class="d-flex pb-4">
+					<div class="pricing">
+						<p class="price">
+							<span>{{ product.price_gross }} zł/{{ product.get_min_qty_info_display }}</span>
+						</p>
+					</div>
 				</div>
 			</div>
-			<div class="bottom-area d-flex px-3">
-				<div class="m-auto">
-					<form method="POST" action=
-							"{% url 'shop:add_to_cart' product.id %}" class="d-flex">
+
+			<div class="bottom-area d-flex px-1">
+				<div class="m-auto w-100">
+					<form method="POST" action="{% url 'shop:add_to_cart' product.id %}"
+					      class="d-flex align-items-center justify-content-around">
 						{% csrf_token %}
-						<input type="number" name="qty"
+						<div class="d-flex align-items-center justify-content-start">
+							<input type="number" name="qty"
 						       class="quantity input-number py-0"
-						       value="1" min="1" max="500"
-										style="padding: 0 0 0 10px;">
-						<button type="submit" class="">
-							<span><i class="ion-ios-cart"></i></span>
+						       value="{{ product.min_qty_value }}"
+						       min="{{ product.min_qty_value }}"
+						       max="500"
+						       step="{{ product.min_qty_value }}"
+						       style="padding: 0 0 0 10px; border-radius: 4px;
+						              border: 1px solid black; width: 70px">
+							<p class="mb-0 pl-1 price">
+								{{ product.get_min_qty_info_display }}
+							</p>
+						</div>
+						<button type="submit" style="border-radius: 4px;
+																					background: #82ae46;
+																					border: none">
+							<span>
+								<i class="ion-ios-cart" style="color: white"></i>
+							</span>
 						</button>
 					</form>
 {#					<a href="{% url 'shop:update_cart' product.id %}?qty=444"#}

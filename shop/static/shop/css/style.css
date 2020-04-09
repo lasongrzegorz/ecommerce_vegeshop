@@ -11409,7 +11409,7 @@ h1, h2, h3, h4, h5,
 
 .product .text .bottom-area {
   position: absolute;
-  bottom: 15px;
+  bottom: 20px;
   left: 0;
   right: 0;
   opacity: 0;
@@ -11419,9 +11419,8 @@ h1, h2, h3, h4, h5,
 
 .product .text .bottom-area a {
   color: #fff;
-  width: 100%;
+  width: 80%;
   background: #82ae46;
-  width: 40px;
   height: 40px;
   margin: 0 auto;
   border-radius: 50%;

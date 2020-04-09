@@ -6,22 +6,17 @@
 			<span class="ion-ios-close"></span>
 		</a>
 	</td>
-	<td class="image-prod border-dark border-1">
-		<div class="img"
-		     style="background-image:url({% static 'shop/img/product-3.jpg' %});">
-		</div>
-	</td>
-	<td class="product-name">
-		<h3>{{ item.product.name }}</h3>
+	<td class="product-name align-middle">
+		<h3 class="m-0">{{ item.product.name }}</h3>
 	</td>
 
 	<td class="price">{{ item.product.price_gross }} PLN</td>
 
 	<td class="quantity">
-			<p class="w-100 text-center">
-				{{ item.quantity }} {{ item.product.min_qty_info }}
+			<p class="w-100 text-center m-0">
+				{{ item.quantity }} {{ item.product.get_min_qty_info_display }}
 			</p>
 	</td>
 
-	<td class="total">{{ item.line_total }} PLN {{ item.total }}</td>
+	<td class="total">{{ item.line_total }} PLN</td>
 </tr>
