@@ -6,11 +6,6 @@
 			<span class="ion-ios-close"></span>
 		</a>
 	</td>
-	<td class="image-prod border-dark border-1">
-		<div class="img"
-		     style="background-image:url({% static 'shop/img/product-3.jpg' %});">
-		</div>
-	</td>
 	<td class="product-name">
 		<h3>{{ item.product.name }}</h3>
 	</td>
@@ -19,7 +14,7 @@
 
 	<td class="quantity">
 			<p class="w-100 text-center">
-				{{ item.quantity }} {{ item.product.min_qty_info }}
+				{{ item.quantity }} {{ item.product.get_min_qty_info_display }}
 			</p>
 	</td>
 
