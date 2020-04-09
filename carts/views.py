@@ -56,21 +56,21 @@ def add_to_cart(request, product_id):
 			cart_products.append(item.product.id)
 
 		qty = request.POST['qty']
-		if int(qty) > 0:
+		if float(qty) > 0:
 			if cart_products:
 				if product_id in cart_products:
 					cart_item = cart.cartitem_set.get(product_id=product_id)
-					cart_item.quantity += int(qty)
+					cart_item.quantity += float(qty)
 					cart_item.save()
 					request.session['items_total'] = cart.cartitem_set.count()
 				else:
 					cart_item = CartItem.objects.create(cart=cart, product=product)
-					cart_item.quantity = int(qty)
+					cart_item.quantity = float(qty)
 					cart_item.save()
 					request.session['items_total'] = cart.cartitem_set.count()
 			else:
 				cart_item = CartItem.objects.create(cart=cart, product=product)
-				cart_item.quantity = int(qty)
+				cart_item.quantity = float(qty)
 				cart_item.save()
 
 				request.session['items_total'] = cart.cartitem_set.count()

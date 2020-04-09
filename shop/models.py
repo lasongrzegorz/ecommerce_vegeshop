@@ -35,7 +35,6 @@ class Product(models.Model):
 		verbose_name='Kategoria'
 	)
 	min_qty_value = models.FloatField(
-		default=1,
 		verbose_name='Min ilość'
 	)
 	min_qty_info = models.CharField(
