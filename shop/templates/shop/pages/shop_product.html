@@ -2,7 +2,7 @@
 
 <div class="col col-md-3 col-lg-2 ftco-animate">
 	<div class="product h-100 d-flex flex-column mb-1">
-		<div class="img-prod" style="overflow: visible;">
+		<div class="img-prod d-flex justify-content-center" style="overflow: visible;">
 			<img class="img-fluid p-3"
 			     src="{% if product.image %}{{ product.image.url }}
 								{% else %}{% static 'shop/img/ProductNA.png' %}{% endif %}"
@@ -44,7 +44,7 @@
 						</div>
 						<button type="submit" style="border-radius: 4px;
 																					background: #82ae46;
-																					border-color: #82ae46">
+																					border: none">
 							<span>
 								<i class="ion-ios-cart" style="color: white"></i>
 							</span>
