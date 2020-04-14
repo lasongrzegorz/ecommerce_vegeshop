@@ -4,6 +4,9 @@ from carts.models import Cart
 from .models import Order, OrderAddress, OrderInvoiceAddress
 from .forms import OrderAddressForm, OrderInvoiceAddressForm
 
+from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
+from django.template.loader import get_template, render_to_string
+
 
 def checkout(request):
 
@@ -57,15 +60,33 @@ def checkout_sent(request):
 		if invoice_address_form.is_valid():
 			order_invoice_address = OrderInvoiceAddressForm(request.POST, instance=order_invoice_address)
 			order_invoice_address.save()
-		# return redirect(reverse('shop:checkout_sent'))
 	else:
 		print('not post request')
+
+	delivery_address = OrderAddress.objects.get(order_id=order_id)
+	invoice_details = OrderInvoiceAddress.objects.get(order_id=order_id)
+	ordered_products = order_to_send.cart.cartitem_set.all()
+	print(delivery_address)
+	context = {
+		'delivery_address': delivery_address,
+		'invoice_details': invoice_details,
+		'ordered_products': ordered_products,
+		'order': order_to_send,
+	}
+	template = 'shop/pages/checkout_sent.html'
+
+	subject = 'html django subject here'
+	sent_from = 'grelas@wp.pl'
+	recipient = ['grelas@wp.pl']
+	html_content = get_template('shop/pages/checkout_sent.html').render(context=context)
+	text_content = 'This is an important message.'
+	msg = EmailMultiAlternatives(subject, text_content, sent_from, recipient)
+	msg.attach_alternative(html_content, 'text/html')
+	msg.send(fail_silently=False)
 
 	order_to_send.status = 'Finished'
 	if order_to_send.status == 'Finished':
 		del request.session['cart_id']
 		del request.session['items_total']
-	context = {}
-	template = 'shop/pages/checkout_sent.html'
 
 	return render(request, template, context)

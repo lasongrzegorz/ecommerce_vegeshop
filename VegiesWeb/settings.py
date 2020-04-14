@@ -129,3 +129,10 @@ MEDIA_URL = '/media/'
 
 # to copy settings to heroku!!
 django_heroku.settings(locals())
+
+EMAIL_HOST = 'smtp.wp.pl'
+EMAIL_HOST_USER = 'grelas@wp.pl'
+EMAIL_HOST_PASSWORD = os.environ.get('LOGIN_CREDENTIALS')
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True

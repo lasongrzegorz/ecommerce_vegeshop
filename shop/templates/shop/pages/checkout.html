@@ -4,17 +4,35 @@
 
 {% block content %}
 
+	<div class="hero-wrap hero-bread"
+	     style="background-image: url({% static 'shop/img/bg_1.jpg' %});">
+	</div>
 
-
-	<section class="ftco-section ftco-cart">
+	<section class="py-3">
 		<div class="container">
 			<div class="row">
 				<div class="d-flex justify-content-center flex-column mx-auto">
-					<h1>checkout details</h1>
-					<p>Numery kont </p>
-					<p>mBank  : 19 1140 2004 0000 3702 7587 3595</p>
-					<p>Idea     :  62 1950 0001 2006 0017 5592 0001</p>
-					<p>W tytule przelewu proszę wpisać numer faktury !</p>
+					<h3>Dane do przelewu:</h3>
+					<table style="border: solid 1px black">
+						<tbody>
+						<tr>
+							<th class="p-2">Konto:</th>
+							<td>19 1140 2004 0000 3702 7587 3595</td>
+						</tr>
+						<tr>
+							<th>Odbiorca:</th>
+							<td>Warzywniak Sp.z o.o.</td>
+						</tr>
+						<tr>
+							<th>Adres:</th>
+							<td>Felińskiego 33B/10,<br>31-236 Kraków</td>
+						</tr>
+						<tr>
+							<th>Tytuł przelewu:</th>
+							<td>Zamówienie nr: XDSXSDASD</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -24,19 +42,26 @@
 		<div class="container">
 			<div class="row mx-auto">
 				<div class="col">
-					<h3>Adres dostawy</h3>
-					<form method="POST" action="{% url 'shop:checkout_sent' %}">
+					<form method="POST" action="{% url 'shop:checkout_sent' %}"
+					      class="d-flex flex-column justify-content-center">
 						{% csrf_token %}
-						<h3>Adres dostawy</h3>
-						<table>
-							{{ address_form.as_table }}
-						</table>
-						<h3>Dane do faktury</h3>
-						<h6>(wypełnij poniżej, jeżeli potrzebujesz)</h6>
-						<table>
-							{{ address_invoice_form.as_table }}
-						</table>
-						<button type="submit"> Wyślij zamówienie </button>
+						<div class="d-flex flex-column justify-content-center flex-lg-row
+					      justify-content-lg-around">
+							<div>
+								<h3>Adres dostawy</h3>
+								<table>
+									{{ address_form.as_table }}
+								</table>
+							</div>
+							<div>
+								<h3>Dane do faktury</h3>
+								<h6>(wypełnij poniżej, jeżeli potrzebujesz faktury)</h6>
+								<table>
+									{{ address_invoice_form.as_table }}
+								</table>
+							</div>
+						</div>
+						<button type="submit"> Wyślij zamówienie</button>
 					</form>
 				</div>
 			</div>
@@ -48,14 +73,13 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-8 ftco-animate">
+				<div class="col-8 ftco-animate mx-auto">
 					<div class="cart-list">
-					<p>Podsumowanie zamówienia: </p>
-{# List order items							#}
+						<p>Podsumowanie zamówienia: </p>
+						{# List order items							#}
 						<table class="table">
 							<thead class="thead-primary">
 							<tr class="text-center">
-								<th>&nbsp;</th>
 								<th>Produkt</th>
 								<th>Cena</th>
 								<th>Ilość</th>
@@ -63,28 +87,20 @@
 							</tr>
 							</thead>
 							<tbody>
-								{% for item in order.cart.cartitem_set.all %}
-									<tr class="text-center">
-										<td class="image-prod border-dark border-1">
-											<div class="img"
-											     style="background-image:url({% static 'shop/img/product-3.jpg' %});">
-											</div>
-										</td>
-										<td class="product-name">
-											<h3>{{ item.product.name }}</h3>
-										</td>
-
-										<td class="price">{{ item.product.price_gross }} PLN</td>
-
-										<td class="quantity">
-												<p class="w-100 text-center">
-													{{ item.quantity }} {{ item.product.min_qty_info }}
-												</p>
-										</td>
-
-										<td class="total">{{ item.line_total }} PLN {{ item.total }}</td>
-									</tr>
-								{% endfor %}
+							{% for item in order.cart.cartitem_set.all %}
+								<tr class="text-center">
+									<td class="product-name align-middle">
+										<h3 class="m-0">{{ item.product.name }}</h3>
+									</td>
+									<td class="price">{{ item.product.price_gross }} PLN</td>
+									<td class="quantity">
+											<p class="w-100 text-center m-0">
+												{{ item.quantity }} {{ item.product.get_min_qty_info_display }}
+											</p>
+									</td>
+									<td class="total">{{ item.line_total }} PLN</td>
+								</tr>
+							{% endfor %}
 							</tbody>
 						</table>
 					</div>

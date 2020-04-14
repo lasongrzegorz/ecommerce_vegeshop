@@ -5,7 +5,7 @@ from shop.models import Product
 class CartItem(models.Model):
 	cart = models.ForeignKey('Cart', null=True, blank=True, on_delete=models.CASCADE)
 	product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
-	quantity = models.FloatField(null=True, blank=True)
+	quantity = models.FloatField()
 
 	def __str__(self):
 		return f'{self.cart.id}'
