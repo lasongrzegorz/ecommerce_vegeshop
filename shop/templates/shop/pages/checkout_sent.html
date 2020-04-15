@@ -12,7 +12,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="d-flex justify-content-center flex-column mx-auto">
-					<h4>Zamówienie wysłane! Dziękujemy</h4><br><br>
+					<h4>Zamówienie {{ order.order_id }} wysłane! Dziękujemy</h4><br><br>
 					<h4>Szczegóły zamówienia</h4>
 					<ol>
 						<li>Dane do przelewu:
@@ -62,7 +62,7 @@
 
 				<div class="col-12 col-md-8 ftco-animate mx-auto">
 					<div class="cart-list">
-						<p>Zamówienie XXXXXX na kwotę {{ order.cart.products_total }}</p>
+						<p>Zamówienie {{ order.order_id }} na kwotę {{ order.cart.products_total }}</p>
 						<table class="table">
 							<thead class="thead-primary">
 							<tr class="text-center">

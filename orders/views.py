@@ -4,8 +4,7 @@ from carts.models import Cart
 from .models import Order, OrderAddress, OrderInvoiceAddress
 from .forms import OrderAddressForm, OrderInvoiceAddressForm
 
-from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
-from django.template.loader import get_template, render_to_string
+from .extras import generate_order_id, send_mail_confirmation
 
 
 def checkout(request):
@@ -20,13 +19,13 @@ def checkout(request):
 	# returns a tuple of (OrderObject, True/False)
 	new_order, created = Order.objects.get_or_create(cart=cart)
 	if created:
-		new_order.order_id = 'random_id'
+		new_order.order_id = generate_order_id()
 		request.session['order_id'] = new_order.id
 		new_order.save()
 
 	if new_order.status == 'Finished':
 		del request.session['cart_id']
-		# return redirect(reverse('shop:carts:cart_view'))
+		return redirect(reverse('shop:carts:cart_view'))
 
 	address_form = OrderAddressForm()
 	address_invoice_form = OrderInvoiceAddressForm()
@@ -66,7 +65,6 @@ def checkout_sent(request):
 	delivery_address = OrderAddress.objects.get(order_id=order_id)
 	invoice_details = OrderInvoiceAddress.objects.get(order_id=order_id)
 	ordered_products = order_to_send.cart.cartitem_set.all()
-	print(delivery_address)
 	context = {
 		'delivery_address': delivery_address,
 		'invoice_details': invoice_details,
@@ -75,14 +73,8 @@ def checkout_sent(request):
 	}
 	template = 'shop/pages/checkout_sent.html'
 
-	subject = 'html django subject here'
-	sent_from = 'grelas@wp.pl'
-	recipient = ['grelas@wp.pl']
-	html_content = get_template('shop/pages/checkout_sent.html').render(context=context)
-	text_content = 'This is an important message.'
-	msg = EmailMultiAlternatives(subject, text_content, sent_from, recipient)
-	msg.attach_alternative(html_content, 'text/html')
-	msg.send(fail_silently=False)
+	# send order details
+	send_mail_confirmation(template, context)
 
 	order_to_send.status = 'Finished'
 	if order_to_send.status == 'Finished':
@@ -90,3 +82,8 @@ def checkout_sent(request):
 		del request.session['items_total']
 
 	return render(request, template, context)
+
+
+
+
+
