@@ -88,14 +88,14 @@ class Product(models.Model):
 		return f'{self.vat * 100}%'
 
 # overwrite save method for resizing images using Pillow lib
-	def save(self, *args, **kwargs):
-
-		if self.image:
-			size_200 = (400, 400)
-			img = Image.open(self.image)
-			img.thumbnail(size_200)
-			img.save(self.image.path)
-			super().save(*args, **kwargs)
-		else:
-			super().save(*args, **kwargs)
+# 	def save(self, *args, **kwargs):
+#
+# 		if self.image:
+# 			size_200 = (400, 400)
+# 			img = Image.open(self.image)
+# 			img.thumbnail(size_200)
+# 			img.save(self.image.path)
+# 			super().save(*args, **kwargs)
+# 		else:
+# 			super().save(*args, **kwargs)
 
