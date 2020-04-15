@@ -4,7 +4,99 @@
 
 {% block content %}
 
-	<h1>Zamówienie wysłane! Dziękujemy</h1>
+	<div class="hero-wrap hero-bread"
+	     style="background-image: url({% static 'shop/img/bg_1.jpg' %});">
+	</div>
+
+	<section class="ftco-section ftco-cart pt-4 pb-2">
+		<div class="container">
+			<div class="row">
+				<div class="d-flex justify-content-center flex-column mx-auto">
+					<h4>Zamówienie {{ order.order_id }} wysłane! Dziękujemy</h4><br><br>
+					<h4>Szczegóły zamówienia</h4>
+					<ol>
+						<li>Dane do przelewu:
+							<ul>
+								<li>Kwota: <span class="font-weight-bold">{{ order.cart.products_total }} PLN</span></li>
+								<li>Odbiorca: <span class="font-weight-bold">Warzywniak Sp. z o.o.</span></li>
+								<li>Adres: <span class="font-weight-bold">Felińskiego 33B/10, 31-236 Kraków</span></li>
+								<li>Idea Bank: <span class="font-weight-bold">62 1950 0001 2006 0017 5592 0001</span></li>
+								<li>Tytuł przelewu: <span class="font-weight-bold">!!nr zamowienia!!</span></li>
+							</ul>
+						</li>
+						<li>Adres dostawy
+							<ul>
+								<li>Imię i nazwisko: <span class="font-weight-bold">{{ delivery_address.name }}</span></li>
+								<li>Ulica: <span class="font-weight-bold">{{ delivery_address.street }}</span></li>
+								<li>Miasto: <span class="font-weight-bold">{{ delivery_address.city }}</span></span></li>
+								<li>Kod pocztowy: <span class="font-weight-bold">{{ delivery_address.zipcode }}</span></li>
+								<li>Telefon: <span class="font-weight-bold">{{ delivery_address.phone }}</span></li>
+								<li>Email: <span class="font-weight-bold">{{ delivery_address.email }}</span></li>
+							</ul>
+						</li>
+						<li>Dane do faktury
+							<ul>
+							{% if invoice_details.invoice_company %}
+								<li>Firma: <span class="font-weight-bold">{{ invoice_details.invoice_company }}</span></li>
+								<li>Ulica: <span class="font-weight-bold">{{ invoice_details.invoice_street }}</span></li>
+								<li>Miasto: <span class="font-weight-bold">{{ invoice_details.invoice_city }}</span></li>
+								<li>Kod pocztowy: <span class="font-weight-bold">{{ invoice_details.invoice_zipcode }}</span></li>
+								<li>Telefon: <span class="font-weight-bold">{{ invoice_details.invoice_phone }}</span></li>
+								<li>NIP: <span class="font-weight-bold">{{ invoice_details.invoice_nip }}</span></li>
+								<li>Regon: <span class="font-weight-bold">{{ invoice_details.invoice_regon }}</span></li>
+							{% else %}
+								<li><span class="font-weight-bold">Potwierdzenie paragonem</span></li>
+							{% endif %}
+							</ul>
+						</li>
+						<li>Zamówione produkty wg tabeli poniżej</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section ftco-cart pt-2 pb-4">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-12 col-md-8 ftco-animate mx-auto">
+					<div class="cart-list">
+						<p>Zamówienie {{ order.order_id }} na kwotę {{ order.cart.products_total }}</p>
+						<table class="table">
+							<thead class="thead-primary">
+							<tr class="text-center">
+								<th class="py-2">Produkt</th>
+								<th class="py-2">Cena jednostkowa</th>
+								<th class="py-2">Ilość</th>
+								<th class="py-2">Cena</th>
+							</tr>
+							</thead>
+							<tbody>
+							{% for item in ordered_products %}
+								<tr class="text-center">
+									<td class="product-name">
+										<h3 class="m-0">{{ item.product.name }}</h3>
+									</td>
+
+									<td class="price">{{ item.product.price_gross }} PLN</td>
+
+									<td class="quantity">
+										<p class="w-100 text-center m-0">
+											{{ item.quantity }} {{ item.product.get_min_qty_info_display }}
+										</p>
+									</td>
+
+									<td class="total">{{ item.line_total }} PLN</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 
 {% endblock %}

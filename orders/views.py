@@ -4,6 +4,8 @@ from carts.models import Cart
 from .models import Order, OrderAddress, OrderInvoiceAddress
 from .forms import OrderAddressForm, OrderInvoiceAddressForm
 
+from .extras import generate_order_id, send_mail_confirmation
+
 
 def checkout(request):
 
@@ -17,13 +19,13 @@ def checkout(request):
 	# returns a tuple of (OrderObject, True/False)
 	new_order, created = Order.objects.get_or_create(cart=cart)
 	if created:
-		new_order.order_id = 'random_id'
+		new_order.order_id = generate_order_id()
 		request.session['order_id'] = new_order.id
 		new_order.save()
 
 	if new_order.status == 'Finished':
 		del request.session['cart_id']
-		# return redirect(reverse('shop:carts:cart_view'))
+		return redirect(reverse('shop:carts:cart_view'))
 
 	address_form = OrderAddressForm()
 	address_invoice_form = OrderInvoiceAddressForm()
@@ -57,15 +59,31 @@ def checkout_sent(request):
 		if invoice_address_form.is_valid():
 			order_invoice_address = OrderInvoiceAddressForm(request.POST, instance=order_invoice_address)
 			order_invoice_address.save()
-		# return redirect(reverse('shop:checkout_sent'))
 	else:
 		print('not post request')
+
+	delivery_address = OrderAddress.objects.get(order_id=order_id)
+	invoice_details = OrderInvoiceAddress.objects.get(order_id=order_id)
+	ordered_products = order_to_send.cart.cartitem_set.all()
+	context = {
+		'delivery_address': delivery_address,
+		'invoice_details': invoice_details,
+		'ordered_products': ordered_products,
+		'order': order_to_send,
+	}
+	template = 'shop/pages/checkout_sent.html'
+
+	# send order details
+	send_mail_confirmation(template, context)
 
 	order_to_send.status = 'Finished'
 	if order_to_send.status == 'Finished':
 		del request.session['cart_id']
 		del request.session['items_total']
-	context = {}
-	template = 'shop/pages/checkout_sent.html'
 
 	return render(request, template, context)
+
+
+
+
+

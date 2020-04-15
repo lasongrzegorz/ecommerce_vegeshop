@@ -32,12 +32,35 @@
 
 		<script type="text/javascript">
 
-        $(document).ready(function () {
+        $(document).ready(
+            function () {
+
             $('.product-category li .filter-products').on('click', function ( e ) {
 				        $('.product-category li .filter-products.active').removeClass('active');
 				        $(this).addClass('active');
 				    });
-        });
+
+            $('.add-product-to-cart').on('click', function (e) {
+                e.preventDefault();
+                let product_id = $(this).attr('data-product-id');
+                let quantity = $('#input-product' + product_id).val();
+                let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
+
+                $.ajax({
+                    url: 'add_to_cart/' + product_id + '/',
+                    type: 'POST',
+                    data: {
+                        product_id: product_id,
+                        qty: quantity,
+                        csrfmiddlewaretoken: csrftoken,
+                        },
+                    success: function (data) {
+                        alert("Produkt dodany");
+                    }
+
+                    });
+                });
+            });
 
     </script>
 
