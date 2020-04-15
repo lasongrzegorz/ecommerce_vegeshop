@@ -12,56 +12,57 @@
 		<div class="container">
 			<div class="row">
 				<div class="d-flex justify-content-center flex-column mx-auto">
-					<h3>Dane do przelewu:</h3>
-					<table style="border: solid 1px black">
-						<tbody>
-						<tr>
-							<th class="p-2">Konto:</th>
-							<td>19 1140 2004 0000 3702 7587 3595</td>
-						</tr>
-						<tr>
-							<th>Odbiorca:</th>
-							<td>Warzywniak Sp.z o.o.</td>
-						</tr>
-						<tr>
-							<th>Adres:</th>
-							<td>Felińskiego 33B/10,<br>31-236 Kraków</td>
-						</tr>
-						<tr>
-							<th>Tytuł przelewu:</th>
-							<td>Zamówienie nr: XDSXSDASD</td>
-						</tr>
-						</tbody>
-					</table>
+					<h5 class="text-center">Aby zrealizować zamówienie,
+						musisz je
+						opłacić.
+						<br>Poniżej dane do przelewu:
+					</h5>
+					<div class="mx-auto d-flex pt-2">
+						<div class="pr-3">
+							<p>Konto</p>
+							<p>Odbiorca</p>
+							<p>Adres</p>
+							<p>Tytuł przelewu</p>
+						</div>
+						<div class="pl-3">
+							<p>19 1140 2004 0000 3702 7587 3595</p>
+							<p>Warzywniak Sp.z o.o.</p>
+							<p>Felińskiego 33B/10, 31-236 Kraków</p>
+							<p>Zamówienie nr {{ order.order_id }}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
+	<hr>
 	<section class="address-details">
 		<div class="container">
 			<div class="row mx-auto">
 				<div class="col">
 					<form method="POST" action="{% url 'shop:checkout_sent' %}"
-					      class="d-flex flex-column justify-content-center">
+					      class="d-flex flex-column">
 						{% csrf_token %}
 						<div class="d-flex flex-column justify-content-center flex-lg-row
-					      justify-content-lg-around">
+					      justify-content-lg-around pb-3">
 							<div>
-								<h4>Adres dostawy</h4>
-								<table>
+								<h5 class="text-center">Adres dostawy</h5>
+								<h6 class="text-center">(pola obowiązkowe)</h6>
+								<table class="mx-auto">
 									{{ address_form.as_table }}
 								</table>
 							</div>
 							<div>
-								<h4>Dane do faktury</h4>
-								<h6>(wypełnij poniżej, jeżeli potrzebujesz faktury)</h6>
-								<table>
+								<h5 class="text-center">Dane do faktury</h5>
+								<h6 class="text-center">(wypełnij poniżej, jeżeli potrzebujesz faktury)</h6>
+								<table class="mx-auto">
 									{{ address_invoice_form.as_table }}
 								</table>
 							</div>
 						</div>
-						<button type="submit"> Wyślij zamówienie</button>
+						<button type="submit" class="mx-auto" style="width: 200px;">Wyślij
+							zamówienie</button>
 					</form>
 				</div>
 			</div>
@@ -75,15 +76,16 @@
 
 				<div class="col-8 ftco-animate mx-auto">
 					<div class="cart-list">
-						<p>Podsumowanie zamówienia: </p>
+						<p>Podsumowanie zamówienia nr <span class="font-weight-bold">{{ order.order_id }}</span></p>
+
 						{# List order items							#}
 						<table class="table">
 							<thead class="thead-primary">
 							<tr class="text-center">
-								<th>Produkt</th>
-								<th>Cena</th>
-								<th>Ilość</th>
-								<th>Suma</th>
+								<th class="py-2">Produkt</th>
+								<th class="py-2">Cena</th>
+								<th class="py-2">Ilość</th>
+								<th class="py-2">Suma</th>
 							</tr>
 							</thead>
 							<tbody>
