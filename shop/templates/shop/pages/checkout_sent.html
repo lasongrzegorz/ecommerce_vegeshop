@@ -26,26 +26,26 @@
 						</li>
 						<li>Adres dostawy
 							<ul>
-								<li>Imię i nazwisko: {{ delivery_address.name }}</li>
-								<li>Ulica: {{ delivery_address.street }}</li>
-								<li>Miasto: {{ delivery_address.city }}</li>
-								<li>Kod pocztowy: {{ delivery_address.zipcode }}</li>
-								<li>Telefon: {{ delivery_address.phone }}</li>
-								<li>Email: {{ delivery_address.email }}</li>
+								<li>Imię i nazwisko: <span class="font-weight-bold">{{ delivery_address.name }}</span></li>
+								<li>Ulica: <span class="font-weight-bold">{{ delivery_address.street }}</span></li>
+								<li>Miasto: <span class="font-weight-bold">{{ delivery_address.city }}</span></span></li>
+								<li>Kod pocztowy: <span class="font-weight-bold">{{ delivery_address.zipcode }}</span></li>
+								<li>Telefon: <span class="font-weight-bold">{{ delivery_address.phone }}</span></li>
+								<li>Email: <span class="font-weight-bold">{{ delivery_address.email }}</span></li>
 							</ul>
 						</li>
 						<li>Dane do faktury
 							<ul>
 							{% if invoice_details.invoice_company %}
-								<li>Firma: {{ invoice_details.invoice_company }}</li>
-								<li>Ulica: {{ invoice_details.invoice_street }}</li>
-								<li>Miasto: {{ invoice_details.invoice_city }}</li>
-								<li>Kod pocztowy: {{ invoice_details.invoice_zipcode }}</li>
-								<li>Telefon: {{ invoice_details.invoice_phone }}</li>
-								<li>NIP: {{ invoice_details.invoice_nip }}</li>
-								<li>Regon: {{ invoice_details.invoice_regon }}</li>
+								<li>Firma: <span class="font-weight-bold">{{ invoice_details.invoice_company }}</span></li>
+								<li>Ulica: <span class="font-weight-bold">{{ invoice_details.invoice_street }}</span></li>
+								<li>Miasto: <span class="font-weight-bold">{{ invoice_details.invoice_city }}</span></li>
+								<li>Kod pocztowy: <span class="font-weight-bold">{{ invoice_details.invoice_zipcode }}</span></li>
+								<li>Telefon: <span class="font-weight-bold">{{ invoice_details.invoice_phone }}</span></li>
+								<li>NIP: <span class="font-weight-bold">{{ invoice_details.invoice_nip }}</span></li>
+								<li>Regon: <span class="font-weight-bold">{{ invoice_details.invoice_regon }}</span></li>
 							{% else %}
-								<li>Potwierdzenie paragonem</li>
+								<li><span class="font-weight-bold">Potwierdzenie paragonem</span></li>
 							{% endif %}
 							</ul>
 						</li>
