@@ -11,12 +11,32 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10 mb-5 text-center">
-					<ul class="product-category">
-						<li><a href="{% url 'shop:shop' %}" class="filter-products active">Wszystkie</a></li>
-						<li><a href="{% url 'shop:vegetables' %}" class="filter-products">Warzywa</a></li>
-						<li><a href="{% url 'shop:fruits' %}" class="filter-products">Owoce</a></li>
-						<li><a href="{% url 'shop:spices' %}" class="filter-products">Przyprawy</a></li>
-						<li><a href="{% url 'shop:others' %}" class="filter-products">Inne</a></li>
+					<ul class="product-category pl-0">
+						<li>
+							<form method="GET" class="filter-products">
+								<input type="submit" value="Wszystkie" name="q">
+							</form>
+						</li>
+						<li>
+							<form method="GET" class="filter-products">
+								<input type="submit" value="Warzywa" name="q">
+							</form>
+						</li>
+						<li>
+							<form method="GET" class="filter-products">
+								<input type="submit" value="Owoce" name="q">
+							</form>
+						</li>
+						<li>
+							<form method="GET" class="filter-products">
+								<input type="submit" value="Przyprawy" name="q">
+							</form>
+						</li>
+						<li>
+							<form method="GET" class="filter-products">
+								<input type="submit" value="Inne" name="q">
+							</form>
+						</li>
 					</ul>
 				</div>
 			</div>

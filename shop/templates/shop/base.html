@@ -35,11 +35,6 @@
         $(document).ready(
             function () {
 
-            $('.product-category li .filter-products').on('click', function ( e ) {
-				        $('.product-category li .filter-products.active').removeClass('active');
-				        $(this).addClass('active');
-				    });
-
             $('.add-product-to-cart').on('click', function (e) {
                 e.preventDefault();
                 let product_id = $(this).attr('data-product-id');
