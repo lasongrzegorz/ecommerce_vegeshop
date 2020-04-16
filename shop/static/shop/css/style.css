@@ -12075,15 +12075,15 @@ textarea.form-control {
   color: #000000;
 }
 
-#map {
-  width: 100%;
-}
+/*#map {*/
+/*  width: 100%;*/
+/*}*/
 
-@media (max-width: 991.98px) {
-  #map {
-    height: 300px;
-  }
-}
+/*@media (max-width: 991.98px) {*/
+/*  #map {*/
+/*    height: 300px;*/
+/*  }*/
+/*}*/
 
 @-webkit-keyframes pulse {
   0% {
