@@ -9,7 +9,17 @@ def index(request):
 
 
 def shop_view(request):
-	products = Product.objects.all().order_by('name')
+	if request.GET.get('q') == 'Warzywa':
+		products = Product.objects.filter(category='Vegetables').order_by('name')
+	elif request.GET.get('q') == 'Owoce':
+		products = Product.objects.filter(category='Fruits').order_by('name')
+	elif request.GET.get('q') == 'Przyprawy':
+		products = Product.objects.filter(category='Spices').order_by('name')
+	elif request.GET.get('q') == 'Inne':
+		products = Product.objects.filter(category='Other').order_by('name')
+	else:
+		products = Product.objects.all().order_by('name')
+
 	template = 'shop/pages/shop.html'
 	context = {"products": products}
 	return render(request, template, context)

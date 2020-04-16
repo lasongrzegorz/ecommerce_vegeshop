@@ -11277,6 +11277,21 @@ h1, h2, h3, h4, h5,
   color: #fff;
 }
 
+.product-category li form.filter-products input {
+  background: none;
+  color: #82ae46;
+  padding: 5px 20px;
+  border: 0;
+  border-radius: 4px;
+}
+
+.product-category li form.filter-products.active input {
+  background: #82ae46;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+}
+
 .ftco-product .owl-carousel .owl-stage-outer {
   padding-bottom: 2em;
   position: relative;
