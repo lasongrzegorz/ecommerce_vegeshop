@@ -40,14 +40,14 @@
                 let product_id = $(this).attr('data-product-id');
                 let quantity = $('#input-product' + product_id).val();
                 let csrftoken = $('input[name=csrfmiddlewaretoken]').val();
-                console.log('quantity: ' + quantity);
+
                 $.ajax({
                     url: 'add_to_cart/' + product_id + '/',
                     type: 'POST',
                     data: {
-                        product_id: product_id,
-                        qty: quantity,
-                        csrfmiddlewaretoken: csrftoken,
+                        'product_id': product_id,
+                        'qty': quantity,
+                        'csrfmiddlewaretoken': csrftoken,
                         },
                     success: function (data) {
                         alert("Produkt dodany");
