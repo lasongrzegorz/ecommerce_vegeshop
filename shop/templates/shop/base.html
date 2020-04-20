@@ -50,11 +50,18 @@
                         'csrfmiddlewaretoken': csrftoken,
                         },
                     success: function (data) {
-                        alert("Produkt dodany");
+                        {#alert("Produkt dodany");#}
+                        $.ajax({
+                            url: 'session-counter/',
+                            type: 'GET',
+		                        success: function (data) {
+                                $('.sessions-cart-counter').html(data);
+                            }
+                        });
                     }
-
-                    });
                 });
+            });
+
             });
 
     </script>

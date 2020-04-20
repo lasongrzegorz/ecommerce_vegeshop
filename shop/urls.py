@@ -9,7 +9,7 @@ from .views import (
     contact_view,
     about_view,
 )
-from carts.views import add_to_cart
+from carts.views import add_to_cart, get_cartitems_counter
 from orders.views import checkout, checkout_sent
 
 app_name = 'shop'
@@ -27,4 +27,5 @@ urlpatterns = [
     path('shop/checkout/sent', checkout_sent, name='checkout_sent'),
     path('contact/', contact_view, name='contact'),
     path('about/', about_view, name='about'),
+    path('shop/session-counter/', get_cartitems_counter, name='get_cartitems_counter')
 ]

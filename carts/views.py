@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, Http404, HttpResponse
 from django.urls import reverse
 
 from shop.models import Product
@@ -75,6 +75,8 @@ def add_to_cart(request, product_id):
 
 				request.session['items_total'] = cart.cartitem_set.count()
 
+			print(f"sessions: {request.session['items_total']}")
+
 			return redirect(reverse('shop:shop'))
 	else:
 		return redirect(reverse('shop:shop'))
@@ -86,3 +88,10 @@ def remove_from_cart(request, id):
 	cart_item.delete()
 
 	return redirect(reverse('shop:carts:cart_view'))
+
+
+def get_cartitems_counter(request):
+	if request.is_ajax():
+		return HttpResponse(request.session['items_total'])
+	else:
+		return Http404
