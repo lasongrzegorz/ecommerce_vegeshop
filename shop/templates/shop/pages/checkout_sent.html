@@ -62,7 +62,7 @@
 
 				<div class="col-12 col-md-8 ftco-animate mx-auto">
 					<div class="cart-list">
-						<p>Zamówienie {{ order.order_id }} na kwotę {{ order.cart.products_total }}</p>
+						<p>Zamówienie {{ order.order_id }} na kwotę {{ order.cart.products_total }} zł</p>
 						<table class="table">
 							<thead class="thead-primary">
 							<tr class="text-center">
@@ -79,7 +79,7 @@
 										<h3 class="m-0">{{ item.product.name }}</h3>
 									</td>
 
-									<td class="price">{{ item.product.price_gross }} PLN</td>
+									<td class="price">{{ item.product.price_gross }} zł/{{item.product.get_min_qty_info_display }}</td>
 
 									<td class="quantity">
 										<p class="w-100 text-center m-0">
@@ -87,7 +87,7 @@
 										</p>
 									</td>
 
-									<td class="total">{{ item.line_total }} PLN</td>
+									<td class="total">{{ item.line_total }} zł</td>
 								</tr>
 							{% endfor %}
 							</tbody>

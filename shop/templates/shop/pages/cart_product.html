@@ -10,7 +10,7 @@
 		<h3 class="m-0">{{ item.product.name }}</h3>
 	</td>
 
-	<td class="price">{{ item.product.price_gross }} PLN</td>
+	<td class="price">{{ item.product.price_gross }} zł/{{item.product.get_min_qty_info_display }}</td>
 
 	<td class="quantity">
 			<p class="w-100 text-center m-0">
@@ -18,5 +18,5 @@
 			</p>
 	</td>
 
-	<td class="total">{{ item.line_total }} PLN</td>
+	<td class="total">{{ item.line_total }} zł</td>
 </tr>
