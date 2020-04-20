@@ -5,35 +5,37 @@
 	{% include 'shop/head.html' %}
 
 </head>
-<body >
+<body>
 
-    {% include 'shop/navbar.html' %}
-
-
-    {% block content %}
-
-    {% endblock %}
+{% include 'shop/navbar.html' %}
 
 
-    {% include 'shop/subscription.html' %}
+{% block content %}
 
-    {% include 'shop/footer.html' %}
-
-
-    <div id="ftco-loader" class="show fullscreen">
-        <svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
-        </svg>
-    </div>
+{% endblock %}
 
 
-    {% include 'shop/scripts.html' %}
+{% include 'shop/subscription.html' %}
 
-		<script type="text/javascript">
+{% include 'shop/footer.html' %}
 
-        $(document).ready(
-            function () {
+
+<div id="ftco-loader" class="show fullscreen">
+	<svg class="circular" width="48px" height="48px">
+		<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+		        stroke="#eeeeee"/>
+		<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4"
+		        stroke-miterlimit="10" stroke="#F96D00"/>
+	</svg>
+</div>
+
+
+{% include 'shop/scripts.html' %}
+
+<script type="text/javascript">
+
+    $(document).ready(
+        function () {
 
             $('.add-product-to-cart').on('click', function (e) {
                 e.preventDefault();
@@ -48,13 +50,12 @@
                         'product_id': product_id,
                         'qty': quantity,
                         'csrfmiddlewaretoken': csrftoken,
-                        },
+                    },
                     success: function (data) {
-                        {#alert("Produkt dodany");#}
                         $.ajax({
                             url: 'session-counter/',
                             type: 'GET',
-		                        success: function (data) {
+                            success: function (data) {
                                 $('.sessions-cart-counter').html(data);
                             }
                         });
@@ -62,9 +63,20 @@
                 });
             });
 
+            $('#modal-add-product-to-cart').on('show.bs.modal', function (event) {
+                console.log('here2');
+                let button = $(event.relatedTarget) ;// Button that triggered the modal
+                let product_id = button.data('product-id'); // Extract info from data-* attributes
+		            let product_name = button.data('product-name');
+		            let product_qty_info = button.data('product-qty-info');
+		            let quantity = $('#input-product' + product_id).val();
+		            let modal_text = product_name + ' ' + quantity + product_qty_info;
+                $(this).find('.modal-body h5').text(modal_text);
             });
+        },
+    );
 
-    </script>
+</script>
 
-</body >
-</html >
+</body>
+</html>

@@ -3,7 +3,8 @@
 <div class="col-12 col-md-3 col-lg-2 ftco-animate p-2"
      id="product-section-ajax">
 	<div class="product h-100 d-flex flex-column mb-0">
-		<div class="img-prod d-flex justify-content-center" style="overflow: visible;">
+		<div class="img-prod d-flex justify-content-center"
+		     style="overflow: visible;">
 			<img class="img-fluid p-3"
 			     src="{% if product.image %}{{ product.image.url }}
 								{% else %}{% static 'shop/img/ProductNA.png' %}{% endif %}"
@@ -14,7 +15,8 @@
 			<div class="d-flex flex-column w-100 justify-content-between">
 				<div>
 					<h3>{{ product.name }}</h3>
-					<p>{% if product.description %}{{ product.description }}{% endif %}</p>
+					<p>{% if product.description %}
+						{{ product.description }}{% endif %}</p>
 				</div>
 				<div class="d-flex pb-4">
 					<div class="pricing">
@@ -29,7 +31,7 @@
 				<div class="m-auto w-100">
 					<form method="POST" action="{% url 'shop:add_to_cart' product.id %}"
 					      class="d-flex align-items-center justify-content-center"
-								id="add-product-to-cart-form">
+					      id="add-product-to-cart-form">
 						{% csrf_token %}
 						<div class="d-flex align-items-center justify-content-start pr-2">
 							<input type="number" name="qty"
@@ -49,7 +51,10 @@
 																					background: #82ae46;
 																					border: none"
 						        data-product-id="{{ product.id }}"
-						        class="add-product-to-cart">
+						        data-product-qty-info="{{ product.get_min_qty_info_display }}"
+						        data-product-name="{{ product.name }}"
+						        class="add-product-to-cart"
+						        data-toggle="modal" data-target="#modal-add-product-to-cart">
 							<span><i class="ion-ios-cart" style="color: white"></i></span>
 						</button>
 					</form>
