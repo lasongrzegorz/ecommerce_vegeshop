@@ -27,8 +27,9 @@
 			<span class="oi oi-menu"></span> Menu
 		</button>
 
-		<div class="collapse navbar-collapse" id="ftco-nav">
-			<ul class="navbar-nav ml-auto">
+		<div class="collapse navbar-collapse d-lg-flex justify-content-lg-end"
+		     id="ftco-nav">
+			<ul class="navbar-nav">
 				<li class="nav-item active">
 					<a href="{% url 'shop:shop' %}" class="nav-link">Sklep</a>
 				</li>
@@ -41,11 +42,16 @@
 				<li class="nav-item cta cta-colored">
 					<a href="{% url 'shop:carts:cart_view' %}" class="nav-link">
 						<span class="icon-shopping_cart"></span>
-						{% if request.session.items_total %}
-							[{{ request.session.items_total }}]
-						{% else %}
-							[0]
-						{% endif %}
+						<span>[</span>
+						<span class="sessions-cart-counter">
+							{% if request.session.items_total %}
+								{{ request.session.items_total }}
+							{% else %}
+								0
+							{% endif %}
+						</span>
+						<span>]</span>
+
 					</a>
 				</li>
 			</ul>
