@@ -75,8 +75,6 @@ def add_to_cart(request, product_id):
 
 				request.session['items_total'] = cart.cartitem_set.count()
 
-			print(f"sessions: {request.session['items_total']}")
-
 			return redirect(reverse('shop:shop'))
 	else:
 		return redirect(reverse('shop:shop'))
