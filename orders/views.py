@@ -73,8 +73,8 @@ def checkout_sent(request):
 	}
 	template = 'shop/pages/checkout_sent.html'
 
-	# send order details
-	send_mail_confirmation(template, context)
+	# # send order details
+	# send_mail_confirmation(template, context)
 
 	order_to_send.status = 'Finished'
 	if order_to_send.status == 'Finished':
