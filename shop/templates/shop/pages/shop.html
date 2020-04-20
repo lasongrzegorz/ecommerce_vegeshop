@@ -41,7 +41,32 @@
 				</div>
 			</div>
 
-			{# List all active products#}
+<!--Modal box for product add confirmation -->
+			<div class="row">
+				<div class="col">
+					<div class="modal fade" id="modal-add-product-to-cart"
+					     role="dialog" tabindex="-1" aria-labelledby="ProductAddedToCart"
+					     aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered modal-sm">
+							<div class="modal-content">
+								<div class="modal-header mx-auto border-bottom-0">
+									<h6>Dodano: </h6>
+								</div>
+								<div class="modal-body mx-auto">
+									<h5></h5>
+								</div>
+								<div class="modal-footer mx-auto border-top-0">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">
+										Zamknij
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!--List all active products -->
 			<div class="row">
 				{% for product in products %}
 					{% if product.active %}
